@@ -44,7 +44,7 @@ ON "weixin_jsapi_security_domain" ("weixin_id" ASC);
 ```
 
 Nginx URL Rewrite:
-```json
+```
 location {
     ...
     try_files $uri $uri/ /index.php$query_string;
