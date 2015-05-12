@@ -42,3 +42,11 @@ ON "weixin_jsapi_security_domain" ("jsapi_security_domain" ASC);
 CREATE INDEX "weixin_id"
 ON "weixin_jsapi_security_domain" ("weixin_id" ASC);
 ```
+
+Nginx URL Rewrite:
+```json
+location {
+    ...
+    try_files $uri $uri/ /index.php$query_string;
+}
+```
