@@ -14,6 +14,10 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         $router->addRoute('accessToken', $route);
         $route = new Yaf_Route_Rewrite('jssdkSignPackage', array('controller' => 'weixin', 'action' => 'jssdkSignPackage'));
         $router->addRoute('jssdkSignPackage', $route);
+        $route = new Yaf_Route_Rewrite('authorizeBridge', array('controller' => 'weixin', 'action' => 'authorizeBridge'));
+        $router->addRoute('authorizeBridge', $route);
+        $route = new Yaf_Route_Rewrite('authorizeJSBridge', array('controller' => 'weixin', 'action' => 'authorizeJSBridge'));
+        $router->addRoute('authorizeJSBridge', $route);
     }
 
     public function _initError() {
@@ -21,5 +25,4 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         error_reporting(E_ALL);
         // error_reporting(0);
     }
-
 }

@@ -52,7 +52,7 @@ class WeixinController extends Yaf_Controller_Abstract {
             return;
         } else {
             $rawUrl = urldecode($url);
-            if(! preg_match('/^http[s]?:\/\/(\w+[\.\w+]+)\//', $rawUrl, $match)){
+            if(! preg_match('/^http[s]?:\/\/(\w+[\.\w+]+)[\/|\:]/', $rawUrl, $match)){
                 echo json_encode(array('resultMsg' => 'invalid url'));
                 return;
             }
@@ -87,6 +87,17 @@ class WeixinController extends Yaf_Controller_Abstract {
         }
         $callbackUrl .= 'code='.$this->getRequest()->get('code');
         $this->getResponse()->setRedirect($callbackUrl);
+    }
+
+    public function authorizeJSBridgeAction() {
+        Yaf_DisPatcher::getInstance()->disableView();
+//        header('Content-Type: application/javascript-x');
+        header('Content-Type: text/javascript');
+        $session = Yaf_Session::getInstance();
+
+        if(! $session->has('openid')) {
+            echo 'window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx065cd0a84e8c0389&redirect_uri=http%3A%2F%2Fwww.vzhendi.com%2Fwww_web%2Fapi%2FauthorizeBridge.php%3FcallbackUrl%3Dhttp%3A%2F%2F192.168.0.111%2Fdianqiu%2Findex.php&response_type=code&scope=snsapi_userinfo#wechat_redirect";';
+        }
     }
 
     private function accessTokenWithCacheById($id){
